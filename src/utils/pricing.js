@@ -24,16 +24,8 @@ export function formatMoney(amount) {
 export function getUnitPrice(productId, orderCatalog = []) {
   const product = getProductById(productId, orderCatalog)
   if (!product) return null
-  return product.price
+  return Number(product.unitPrice || product.price)
 }
-
-/*export function calcLineTotal(productId, quantity) {
-  const unit = getUnitPrice(productId)
-  if (unit == null) return null
-  const qty = Number(quantity)
-  if (!Number.isFinite(qty) || qty <= 0) return null
-  return unit * qty
-}*/
 
 export function calcLineTotal(productId, quantity, extras = [], extrasCatalog = [], orderCatalog = []) {
   if (!productId || !quantity) return 0;
@@ -44,26 +36,29 @@ export function calcLineTotal(productId, quantity, extras = [], extrasCatalog = 
   // Suma de precios de los extras seleccionados
   const extrasTotalPrice = extras.reduce((sum, extra) => {
     const extraData = extrasCatalog.find((e) => e.uuid === extra.extraId);
-    return sum + (extraData?.price || 0);
+
+    return sum + (Number(extraData?.price) || 0);
   }, 0);
 
   // Precio unitario = precio del producto + suma de precios de extras
   const unitPrice = (unit || 0) + extrasTotalPrice;
-
   return unitPrice * Number(quantity);
 }
 
 /**
  * @param {{ productId: string, quantity: number|string }[]} items
  */
-export function calcOrderTotal(items) {
+export function calcOrderTotal(items, extrasCatalog, orderCatalog) {
+  //console.log("calculatin order total with items: ", items) // this is ok
   let total = 0
   let hasPriced = false
   let hasUnpriced = false
 
   for (const item of items) {
     if (!item?.productId) continue
-    const line = calcLineTotal(item.productId, item.quantity, item.extras)
+
+    const line = calcLineTotal(item.productId, item.quantity, item.extras, extrasCatalog, orderCatalog)
+
     if (line == null) {
       hasUnpriced = true
       continue

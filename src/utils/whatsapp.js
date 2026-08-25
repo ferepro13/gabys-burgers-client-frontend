@@ -25,7 +25,7 @@ export function openWhatsAppOrder(data, extrasData, productsData) {
   } = data
 
   const enriched = enrichOrderItems(items, extrasData, productsData)
-  const orderTotal = calcOrderTotal(enriched)
+  const orderTotal = calcOrderTotal(enriched, extrasData, productsData)
   const businessPhone = siteConfig.whatsapp.phone
 
   const lines = [

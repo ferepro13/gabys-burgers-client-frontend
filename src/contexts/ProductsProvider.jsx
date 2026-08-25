@@ -17,13 +17,10 @@ export const ProductsProvider = ({children}) => {
             queryFn: getProducts,
         }
     )
-    console.log("products data", data);
-    
-    const result = data ? Object.groupBy(data, ({category}) => String(category)) : {}
-    console.log(JSON.stringify(result))
+    const categorizedData = data ? Object.values(Object.groupBy(data, ({category}) => String(category))) : data
 
     return (
-        <ProductsContext.Provider value={{data, isLoading, isError, isFetching, refetch}}>
+        <ProductsContext.Provider value={{data, categorizedData, isLoading, isError, isFetching, refetch}}>
             {children}
         </ProductsContext.Provider>
     )

@@ -106,7 +106,7 @@ export function ExtrasSelect({
                   className={optionClass}
                   onClick={() => handleSelectExtra(extra.uuid)}
                 >
-                  {extra.name} — {extra.price.toFixed(2)}€
+                  {extra.name} — {Number(extra.price).toFixed(2)}$
                 </button>
               ))
             )}

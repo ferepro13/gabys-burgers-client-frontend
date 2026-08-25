@@ -15,8 +15,6 @@ export const ExtrasProvider = ({children}) => {
             queryFn: getExtras,
         }
     )
-    console.log("extras data", data);
-
     return (
         <ExtrasContext.Provider value={{data, isLoading, isError, isFetching, refetch}}>
             {children}

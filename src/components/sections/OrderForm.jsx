@@ -65,7 +65,7 @@ export function OrderForm() {
     console.log("watched", watchedItems)
     console.log("filled", filledItems)
   }
-  const orderTotal = calcOrderTotal(filledItems)
+  const orderTotal = calcOrderTotal(filledItems, extrasData, productsData)
 
   const addProductLine = useCallback(
     (productId) => {
