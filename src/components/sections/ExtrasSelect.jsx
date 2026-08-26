@@ -85,10 +85,12 @@ export function ExtrasSelect({
       <div className="relative">
         <button
           type="button"
+          disabled={extrasLoading || extrasError}
+          aria-disabled={extrasLoading || extrasError}
           onClick={() => setIsOpen(!isOpen)}
           className="rounded-full border border-gold/30 px-3 py-1 text-xs text-gold-light transition hover:border-gold/60"
         >
-          {isOpen ? 'Cerrar' : 'Agregos…'}
+          {isOpen ? 'Cerrar' : extrasLoading ? "Cargando agregos..." : extrasError ? "Error cargando agregos" : 'Agregos…'}
         </button>
 
         {/* Dropdown con opciones */}

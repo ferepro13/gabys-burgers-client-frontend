@@ -5,6 +5,8 @@ import { createEmptyOrderLine } from '../../utils/orderPrefill';
 import { ExtrasSelect } from './ExtrasSelect';
 import { useProducts } from '../../hooks/useProducts';
 import { useExtras } from '../../hooks/useExtras';
+import {LoadingState} from "../ui/LoadingState";
+import {EmptyState} from "../ui/EmptyState";
 
 /**
  * need to use useProducts hook to get the products from the provider instead of using the static menuItems, lets change it
@@ -34,7 +36,7 @@ export function OrderLineFields({
 
   // luego debo manejar los estados de carga y error de los productos y extras, para mostrar un mensaje o spinner mientras se cargan
   const { data: productsData, isLoading: productsLoading, isError: productsError } = useProducts();
-  const { data: extrasData, isLoading: extrasLoading, isError: extrasError } = useExtras();
+  const { data: extrasData } = useExtras();
 
   const stockProductsData = productsData?.filter((p) => p.stock > 0) || [];
 
@@ -82,13 +84,17 @@ export function OrderLineFields({
             )}
           </div>
 
-          <Controller
+            {/** if data is ok render the controller, if not render the corresponding state */}
+          {productsLoading && <LoadingState label={"Cargando productos..."}/>}
+          {productsError && <EmptyState title={"Ocurrió un error al cargar los productos"} description={"Compruebe su conexión a internet"}/>}
+
+          {!productsLoading && !productsError && <Controller
             name={`items.${index}.productId`}
             control={control}
             rules={{
               validate: (value) => {
                 if (isLast && !value) return true;
-                return value ? true : 'Seleccioná un producto.';
+                return value ? true : 'Selecciona un producto.';
               },
             }}
             render={({ field }) => (
@@ -137,7 +143,7 @@ export function OrderLineFields({
                 ))}
               </select>
             )}
-          />
+          />}
 
           {errors?.productId && (
             <p className="mt-1 text-xs text-flame" role="alert">

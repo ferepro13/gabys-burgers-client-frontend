@@ -9,6 +9,8 @@ import { SectionHeading } from '../ui/SectionHeading'
 import { TiltCard } from '../ui/TiltCard'
 import { Button } from '../ui/Button'
 import { useProducts } from '../../hooks/useProducts'
+import { LoadingState } from "../ui/LoadingState"
+import { EmptyState } from "../ui/EmptyState"
 
 /**
  * 
@@ -20,7 +22,7 @@ import { useProducts } from '../../hooks/useProducts'
 
 export function Menu() {
   // luego debo manejar los estados de carga y error de los productos, para mostrar un mensaje o spinner mientras se cargan
-  const { categorizedData: productsCategoriesData, isLoading: productsLoading, isError: productsError } = useProducts();
+  const { categorizedData: productsCategoriesData, isLoading: productsLoading, isError: productsError, refetch } = useProducts();
 
 
   return (
@@ -39,9 +41,9 @@ export function Menu() {
           />
         </FadeUp>
 
-        {!productsCategoriesData?.length && <p>No hay productos aun, estado temporal</p>}
-        {productsLoading && <p>Cargando productos, estado temporal</p>}
-        {productsError && <p>Error al cargar productos, estado temporal</p>}
+        {!productsCategoriesData?.length && <EmptyState title={"No hay productos que mostrar..."} description={"Compruebe su conexión a internet"} action={refetch} actionName={"Reintentar"} ActionRenderer = {Button}/>}
+        {productsLoading && <LoadingState label={"Cargando productos..."}/>}
+        {productsError && <EmptyState title={"Ocurrió un error al cargar los productos"} description={"Compruebe su conexión a internet"} action={refetch} actionName={"Reintentar"} ActionRenderer={Button}/>}
 
         <div className='mt-4 flex flex-col'>
           {productsCategoriesData?.map((category, i) => (

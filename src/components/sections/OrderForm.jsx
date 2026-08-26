@@ -55,9 +55,10 @@ export function OrderForm() {
     name: 'items',
   })
 
+  // no creo necesario manejar estados de carga y error en el formulario directamente
   // luego debo manejar los estados de carga y error de los productos y extras, para mostrar un mensaje o spinner mientras se cargan
-  const { data: productsData, isLoading: productsLoading, isError: productsError } = useProducts();
-  const { data: extrasData, isLoading: extrasLoading, isError: extrasError } = useExtras();
+  const { data: productsData } = useProducts();
+  const { data: extrasData } = useExtras();
 
   const watchedItems = useWatch({ control, name: 'items' }) ?? []
   const filledItems = enrichOrderItems(watchedItems, extrasData || [], productsData || [])

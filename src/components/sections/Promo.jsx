@@ -20,7 +20,7 @@ export function Promo() {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-ink/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-gold/15 via-transparent to-flame/10" />
+        <div className="absolute inset-0 bg-linear-to-r from-gold/15 via-transparent to-flame/10" />
       </div>
 
       <Container className="relative">

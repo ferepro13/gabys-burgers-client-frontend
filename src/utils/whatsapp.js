@@ -46,9 +46,10 @@ export function openWhatsAppOrder(data, extrasData, productsData) {
     const unitLabel = formatMoney(item.unitPrice)
     const lineLabel = formatMoney(item.lineTotal)
     const extrasList = !item?.extras.length ? "" : item?.extras.reduce((current, extra) => {
+      console.log(extrasData)
       const extraData = extrasData?.find((e) => e.uuid === extra.extraId);
       return current + `${extraData.name}, `
-    }, ` con agrego de `)
+    }, ` con agrego de `) 
 
     lines.push(
       `${index + 1}. *${item.name}${extrasList}* x ${item.quantity}`,
