@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-//import { orderCatalog } from '../../data/menu';
 import { calcLineTotal, formatMoney } from '../../utils/pricing';
 import { createEmptyOrderLine } from '../../utils/orderPrefill';
 import { ExtrasSelect } from './ExtrasSelect';
@@ -7,12 +6,6 @@ import { useProducts } from '../../hooks/useProducts';
 import { useExtras } from '../../hooks/useExtras';
 import {LoadingState} from "../ui/LoadingState";
 import {EmptyState} from "../ui/EmptyState";
-
-/**
- * need to use useProducts hook to get the products from the provider instead of using the static menuItems, lets change it
- * the data should come in the same format and structure as in the menuItems, so we can use the same logic to filter and display the products
- * this format/structure is {uuid, name, description, price, imageUrl, tag, stock, isAvailable} and the uuid is the one that we use to match the product with the selected products in the order
- */
 
 const fieldClass =
   'w-full rounded-lg border border-gold/20 bg-ink px-3 py-2.5 text-sm text-cream placeholder:text-cream/35 outline-none transition focus:border-gold/55 focus:ring-1 focus:ring-gold/40 sm:px-4 sm:py-3 sm:text-base';

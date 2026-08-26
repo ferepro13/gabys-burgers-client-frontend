@@ -3,7 +3,7 @@ export const siteConfig = {
   slogan: '¡Sabor que enamora!',
   tagline: 'El sabor que enamora, en cada bocado',
   description:
-    'Hamburguesas jugosas con ingredientes frescos, pan cuco y el toque secreto Gaby. Pide ahora por WhatsApp.',
+    'Hamburguesas jugosas con ingredientes frescos, pan esponjoso y el toque secreto Gaby. Pide ahora por WhatsApp.',
   whatsapp: {
     phone: '5354564497',
     display: '5456-4497',
@@ -17,7 +17,7 @@ export const siteConfig = {
     { label: 'Inicio', href: '#inicio' },
     { label: 'Nosotros', href: '#nosotros' },
     { label: 'Menú', href: '#menu' },
-    { label: 'Pedido', href: '#pedido' },
+    //{ label: 'Pedido', href: '#pedido' },
   ],
   social: {
     whatsappLabel: 'Para encargos',

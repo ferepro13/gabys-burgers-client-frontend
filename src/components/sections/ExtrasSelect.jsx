@@ -1,12 +1,6 @@
 import { useFieldArray } from 'react-hook-form';
 import { useState } from 'react';
-//import { extrasCatalog } from '../../data/menu';
 import { useExtras } from '../../hooks/useExtras';
-/**
- * need to use useExtras hook to get the extras from the provider instead of using the static extrasCatalog, lets change it
- * the data should come in the same format and structure as in the extrasCatalog, so we can use the same logic to filter and display the extras
- * this format/structure is {uuid, name, price, isAvailable} and the uuid is the one that we use to match the extra with the selected extras in the product
- */
 
 const tagClass =
   'inline-flex items-center gap-1 rounded-full bg-gold/10 px-3 py-1 text-sm text-cream';

@@ -1,5 +1,4 @@
 import { siteConfig } from '../config/site'
-//import { extrasCatalog } from '../data/menu'
 import { enrichOrderItems, formatMoney, calcOrderTotal } from './pricing'
 
 /**

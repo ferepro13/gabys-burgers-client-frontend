@@ -1,4 +1,3 @@
-//import { menuItems } from '../../data/menu'
 import { siteConfig } from '../../config/site'
 import { formatMoney } from '../../utils/pricing'
 import { requestOrderPrefill } from '../../utils/orderPrefill'
@@ -12,18 +11,8 @@ import { useProducts } from '../../hooks/useProducts'
 import { LoadingState } from "../ui/LoadingState"
 import { EmptyState } from "../ui/EmptyState"
 
-/**
- * 
- * need to use useProducts hook to get the products from the provider instead of using the static menuItems, lets change it
- * the data should come in the same format and structure as in the menuItems, so we can use the same logic to filter and display the products
- * this format/structure is {uuid, name, description, price, imageUrl, tag, stock, isAvailable} and the uuid is the one that we use to match the product with the selected products in the order
- * in the future I might add a category field to the products, so we can filter them by category and display them in different sections, but for now we will just display them all in one section
- */
-
 export function Menu() {
-  // luego debo manejar los estados de carga y error de los productos, para mostrar un mensaje o spinner mientras se cargan
   const { categorizedData: productsCategoriesData, isLoading: productsLoading, isError: productsError, refetch } = useProducts();
-
 
   return (
     <section

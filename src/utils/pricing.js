@@ -1,7 +1,3 @@
-//import { orderCatalog } from '../data/menu'
-//import { extrasCatalog } from '../data/menu';
-
-
 export function getProductById(productId, orderCatalog = []) {
   if (!productId) return null
   return orderCatalog.find((item) => item.uuid === productId) ?? null

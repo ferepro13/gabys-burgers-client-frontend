@@ -1,4 +1,4 @@
-export const menuItems = [
+export const menuItems = [ // no longer used, intended only for testing stage
   {
     uuid: 'clasica',
     name: 'Clásica Gaby',
@@ -45,23 +45,8 @@ export const menuItems = [
   },
 ]
 
-/** Extra options available only in the order form */
-export const extraProducts = [
-  {
-    uuid: 'combo-semana',
-    name: 'Combo de la semana',
-    price: 10,
-  },
-  {
-    uuid: 'personalizado',
-    name: 'Consulta / personalizado',
-    price: null,
-  },
-]
-
-export const orderCatalog = [
+export const orderCatalog = [ // no longer used, intended only for testing stage
   ...menuItems.filter(({ stock }) => (stock)),
-  ...extraProducts,
 ]
 
 export const highlights = [
@@ -85,7 +70,7 @@ export const highlights = [
   },
 ]
 
-export const extrasCatalog = [
+export const extrasCatalog = [ // no longer used, intended only for testing stage
   { uuid: 'extra-cebolla', name: 'Cebolla', price: 2.00, isAvailable: true },
   { uuid: 'extra-queso', name: 'Queso', price: 1.50, isAvailable: true },
   { uuid: 'extra-jamon', name: 'Jamón', price: 2.50, isAvailable: true },
