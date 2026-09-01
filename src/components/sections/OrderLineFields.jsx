@@ -58,7 +58,7 @@ export function OrderLineFields({
 
   return (
     <div className="rounded-xl border border-gold/15 bg-ink/60 p-3 sm:p-3.5">
-      <div className="grid grid-cols-[1fr_5.5rem] items-end gap-2 sm:grid-cols-[minmax(0,1fr)_5.5rem_auto]">
+      <div className="grid grid-cols-[1fr_5.5rem] items-start gap-2 sm:grid-cols-[minmax(0,1fr)_5.5rem_auto]">
         {/* Selector de producto */}
         <div className="col-span-2 min-w-0 sm:col-span-1">
           <div className="mb-1 flex items-center justify-between gap-2">
@@ -77,7 +77,7 @@ export function OrderLineFields({
             )}
           </div>
 
-            {/** if data is ok render the controller, if not render the corresponding state */}
+          {/** if data is ok render the controller, if not render the corresponding state */}
           {productsLoading && <LoadingState label={"Cargando productos..."}/>}
           {productsError && <EmptyState title={"Ocurrió un error al cargar los productos"} description={"Compruebe su conexión a internet"}/>}
 
@@ -157,9 +157,11 @@ export function OrderLineFields({
 
         {/* Input de cantidad */}
         <div>
-          <label htmlFor={`items.${index}.quantity`} className={labelClass}>
-            Cant.
-          </label>
+          <div className='mb-2'>
+            <label htmlFor={`items.${index}.quantity`} className={labelClass}>
+              Cant.
+            </label>
+          </div>
           <input
             id={`items.${index}.quantity`}
             type="number"
@@ -198,13 +200,13 @@ export function OrderLineFields({
         </div>
 
         {/* Subtotal y botón quitar */}
-        <div className="flex min-h-10.5 items-center justify-end gap-3 sm:min-h-0 sm:pb-2.5">
+        <div className="flex min-h-10.5 items-end justify-end gap-3 sm:min-h-0 sm:pb-2.5">
           {showSubtotal && (
             <div className="text-right">
-              <p className="text-[10px] leading-none text-cream/45 uppercase">
+              <p className="text-[10px] leading-none text-cream/45 uppercase mt-2">
                 Subtotal
               </p>
-              <p className="mt-1 text-sm font-medium text-gold-light tabular-nums">
+              <p className="mt-4 text-sm font-medium text-gold-light tabular-nums">
                 {formatMoney(lineTotal)}
               </p>
             </div>

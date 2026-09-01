@@ -62,10 +62,7 @@ export function OrderForm() {
 
   const watchedItems = useWatch({ control, name: 'items' }) ?? []
   const filledItems = enrichOrderItems(watchedItems, extrasData || [], productsData || [])
-  if (filledItems.length > 2) {
-    console.log("watched", watchedItems)
-    console.log("filled", filledItems)
-  }
+  
   const orderTotal = calcOrderTotal(filledItems, extrasData, productsData)
 
   const addProductLine = useCallback(
@@ -121,7 +118,8 @@ export function OrderForm() {
     }
 
     clearErrors('items')
-    sendOrderData({...data, items})
+    console.log({...data, items, orderTotal})
+    sendOrderData({...data, items, orderTotal})
     sendOrder({ ...data, items }, extrasData || [], productsData || [])
   }
 
@@ -187,8 +185,15 @@ export function OrderForm() {
                     className="flex items-start justify-between gap-3"
                   >
                     <span>
-                      {item.name} x {item.quantity}
+                      {item.name}
+                      {item?.extras.length > 0 ? <span> {item.extras.reduce((current, extra) => {
+                        const extraData = extrasData?.find((e) => e.uuid === extra.extraId);
+                        return current + ` + ${extraData.name} `
+                      }, ` con:  `)} </span>
+                      : null}
+                      {` . . . x ${item.quantity}`}
                     </span>
+ 
                     <span className="shrink-0 text-gold">
                       {formatMoney(item.lineTotal)}
                     </span>
