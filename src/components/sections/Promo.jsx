@@ -35,7 +35,7 @@ export function Promo() {
             No te pierdas la promoción de la semana
           </h2>
           <p className="mt-4 text-base text-cream/70 sm:text-lg">
-            Combo especial con papas y bebida. Pedí ahora por mensaje directo y
+            {siteConfig.promotion} Pide ahora por mensaje directo y
             te confirmamos al instante.
           </p>
           <div className="mt-8 flex justify-center">

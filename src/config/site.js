@@ -22,4 +22,5 @@ export const siteConfig = {
   social: {
     whatsappLabel: 'Para encargos',
   },
+  promotion: ""
 }
