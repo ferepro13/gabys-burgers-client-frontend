@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const API_URL = (import.meta.env.VITE_ENV === "production") ? (import.meta.env.VITE_API_URL || "http://localhost:3000/api") : "http://localhost:3000/api"
 
 const getProducts = async () => {
     const response = await fetch(`${API_URL}/productos`);
