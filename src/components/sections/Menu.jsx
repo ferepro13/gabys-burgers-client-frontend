@@ -14,6 +14,10 @@ import { EmptyState } from "../ui/EmptyState"
 export function Menu() {
   const { categorizedData: productsCategoriesData, isLoading: productsLoading, isError: productsError, refetch } = useProducts();
 
+  if (productsError) {
+    console.error("Error al cargar los productos:", productsError);
+  }
+
   return (
     <section
       id="menu"
@@ -30,7 +34,7 @@ export function Menu() {
           />
         </FadeUp>
 
-        {!productsCategoriesData?.length && <EmptyState title={"No hay productos que mostrar..."} description={"Compruebe su conexión a internet"} action={refetch} actionName={"Reintentar"} ActionRenderer = {Button}/>}
+        {!productsCategoriesData?.length && !productsLoading && !productsError && <EmptyState title={"No hay productos que mostrar..."} description={"Compruebe su conexión a internet"} action={refetch} actionName={"Reintentar"} ActionRenderer = {Button}/>}
         {productsLoading && <LoadingState label={"Cargando productos..."}/>}
         {productsError && <EmptyState title={"Ocurrió un error al cargar los productos"} description={"Compruebe su conexión a internet"} action={refetch} actionName={"Reintentar"} ActionRenderer={Button}/>}
 

@@ -27,8 +27,8 @@ export function Hero() {
           className="h-full w-full object-cover"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/50" />
+        <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/80 to-ink/35" />
+        <div className="absolute inset-0 bg-linear-to-t from-ink via-transparent to-ink/50" />
       </div>
 
       <Container className="relative flex min-h-svh flex-col justify-end pb-20 pt-28 sm:justify-center sm:pb-24">
@@ -48,8 +48,7 @@ export function Hero() {
             {siteConfig.name}
           </h1>
           <p className="mt-5 max-w-lg text-lg text-cream/80 sm:text-xl">
-            {siteConfig.tagline}. Ingredientes frescos, pan cuco y el toque que
-            enamora.
+            {siteConfig.tagline}. Ingredientes frescos, hamburguesas jugosas y el toque especial de Gaby.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button href="#pedido" size="lg">
@@ -68,7 +67,7 @@ export function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <span className="block h-8 w-px bg-gradient-to-b from-gold to-transparent" />
+      <span className="block h-8 w-px bg-linear-to-b from-gold to-transparent" />
       </motion.div>
     </section>
   )

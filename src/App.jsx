@@ -4,7 +4,7 @@ import { Hero } from './components/sections/Hero'
 import { About } from './components/sections/About'
 import { Highlights } from './components/sections/Highlights'
 import { Menu } from './components/sections/Menu'
-import { Promo } from './components/sections/Promo'
+//import { Promo } from './components/sections/Promo'
 import { OrderForm } from './components/sections/OrderForm'
 
 
@@ -20,7 +20,7 @@ export default function App() {
             <About />
             <Highlights />
             <Menu />
-            <Promo />
+            {/*<Promo />*/}
             <OrderForm />
           </main>
           <Footer />

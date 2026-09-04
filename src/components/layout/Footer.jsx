@@ -24,6 +24,16 @@ export function Footer() {
           <p className="mt-2 text-sm text-cream/55">
             Aceptamos {siteConfig.payments.join(', ')}.
           </p>
+          <p className='mt-6 text-sm text-cream/55'>
+            Contacto del desarrollador: <a
+              href={`https://wa.me/5356661510`}
+              className="text-gold transition hover:text-gold-light"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              +53 5666-1510
+            </a>
+          </p>
         </div>
 
         <div className="text-sm text-cream/45">

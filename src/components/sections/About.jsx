@@ -27,11 +27,11 @@ export function About() {
             align="left"
             eyebrow="Quiénes somos"
             title="No solo hamburguesas: creamos experiencias"
-            description="En Gaby's Burgers usamos ingredientes frescos, pan cuco y una dosis extra de cariño. Desde las clásicas irresistibles hasta creaciones únicas que despiertan tus sentidos."
+            description="En Gaby's Burgers usamos ingredientes frescos, pan esponjoso y una dosis extra de cariño. Desde las clásicas irresistibles hasta creaciones únicas que despiertan tus sentidos."
           />
           <p className="mt-6 max-w-xl text-cream/65">
             Cada bocado lleva el toque secreto Gaby: una receta especial pensada
-            para hacerte volver. Pedí por WhatsApp y disfrutá el sabor que
+            para hacerte volver. Pide por WhatsApp y disfrutá el sabor que
             enamora, donde estés.
           </p>
         </FadeUp>
