@@ -31,7 +31,7 @@ export function About() {
           />
           <p className="mt-6 max-w-xl text-cream/65">
             Cada bocado lleva el toque secreto Gaby: una receta especial pensada
-            para hacerte volver. Pide por WhatsApp y disfrutá el sabor que
+            para hacerte volver. Pide por WhatsApp y disfruta el sabor que
             enamora, donde estés.
           </p>
         </FadeUp>

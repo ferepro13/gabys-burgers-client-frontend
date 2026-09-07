@@ -78,10 +78,10 @@ export function enrichOrderItems(items, extrasCatalog = [], orderCatalog = []) {
     .filter((item) => item?.productId)
     .map((item) => {
       const product = getProductById(item.productId, orderCatalog)
-      const quantity = Number(item.quantity) || 1
+      const quantity = (Number.isInteger(item.quantity) && Number(item.quantity) > 0) ? Number(item.quantity) : 1
       const extras = item?.extras || []
       const lineTotal = calcLineTotal(item.productId, quantity, extras, extrasCatalog || [], orderCatalog || [])
-      const unitPrice = lineTotal/quantity ?? product?.price ?? null
+      const unitPrice = Number(lineTotal)/quantity ?? product?.price ?? null
 
       return {
         productId: item.productId,
