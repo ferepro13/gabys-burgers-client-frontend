@@ -41,7 +41,7 @@ export function Menu() {
         <div className='mt-4 flex flex-col'>
           {productsCategoriesData?.map((category, i) => (
             <div key={i}>
-              <h2 className='mt-7 font-display text-2xl'></h2>
+              <h2 className='mt-7 font-display text-2xl'>{category[0].category}</h2>
               <ul className="mt-10 grid gap-5 sm:grid-cols-2" >
                 {category?.map((item, index) => (
                   <li key={item.uuid}>
