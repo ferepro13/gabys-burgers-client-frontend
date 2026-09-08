@@ -327,6 +327,13 @@ export function OrderForm() {
                     aria-invalid={Boolean(errors.time)}
                     {...register('time', {
                       required: 'Indique la hora de entrega del pedido.',
+                      validate: (timeStr) => {
+                        const [horas, minutos] = timeStr.split(":").map(Number);
+                        const minsFromMidnight = horas*60 + minutos;
+                        const minAllowed = 13*60; //deliveries available from 1:00 pm
+                        const maxAllowed = 20*60; // deliveries close at 8:00 pm
+                        return (minsFromMidnight >= minAllowed && minsFromMidnight<= maxAllowed) ? true : "Nuestro horario de entregas es entre la 1:00 PM y las 8:00 PM"
+                      }
                     })}
                   />
                   {errors.time ? (
