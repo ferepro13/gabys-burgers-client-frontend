@@ -51,7 +51,7 @@ export function Menu() {
                           className="overflow-hidden"
                           float={index % 2 === 0}
                         >
-                          <article className="grid sm:grid-cols-[1.05fr_1fr]">
+                          <article className="grid sm:grid-cols-[1.05fr_1fr] h-48">
                             <div className="relative min-h-48 overflow-hidden sm:min-h-full">
                               <img
                                 src={item.image ?? item.imageUrl}
