@@ -44,7 +44,7 @@ export function calcLineTotal(productId, quantity, extras = [], extrasCatalog = 
 /**
  * @param {{ productId: string, quantity: number|string }[]} items
  */
-export function calcOrderTotal(items, extrasCatalog, orderCatalog) {
+export function calcOrderTotal(items, extrasCatalog, orderCatalog, additionalCosts = []) {
   //console.log("calculatin order total with items: ", items) // this is ok
   let total = 0
   let hasPriced = false
@@ -63,8 +63,11 @@ export function calcOrderTotal(items, extrasCatalog, orderCatalog) {
     total += line
   }
 
+  const additionalCostsTotal = additionalCosts.length ? additionalCosts.reduce((prev, curr) => (prev + Number(curr)), 0) : 0;
+  total += additionalCostsTotal;
+
   if (!hasPriced && hasUnpriced) return null
-  if (!hasPriced) return 0
+  if (!hasPriced && !additionalCostsTotal) return 0
   return total
 }
 

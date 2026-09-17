@@ -12,7 +12,7 @@ import { enrichOrderItems, formatMoney, calcOrderTotal } from './pricing'
  *   items: { productId: string, quantity: number|string }[]
  * }} data
  */
-export function openWhatsAppOrder(data, extrasData, productsData) {
+export function openWhatsAppOrder(data, extrasData, productsData, delivery) {
   const {
     name,
     phone,
@@ -24,7 +24,7 @@ export function openWhatsAppOrder(data, extrasData, productsData) {
   } = data
 
   const enriched = enrichOrderItems(items, extrasData, productsData)
-  const orderTotal = calcOrderTotal(enriched, extrasData, productsData)
+  const orderTotal = calcOrderTotal(enriched, extrasData, productsData, [delivery?.price])
   const businessPhone = siteConfig.whatsapp.phone
 
   const lines = [
@@ -34,6 +34,7 @@ export function openWhatsAppOrder(data, extrasData, productsData) {
     ``,
     `👤 Nombre: ${name}`,
     `📱 Teléfono: ${phone}`,
+    `📍 Domicilio a: ${delivery.locationName} por ${delivery?.price}`,
     `📍 Dirección / zona: ${location}`,
     `🕐 Fecha deseada: ${date}`,
     `🕐 Hora deseada: ${time}`,

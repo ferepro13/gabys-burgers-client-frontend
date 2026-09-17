@@ -22,6 +22,7 @@ import { SectionHeading } from '../ui/SectionHeading'
 import { OrderLineFields } from './OrderLineFields'
 import { useProducts } from '../../hooks/useProducts'
 import { useExtras } from '../../hooks/useExtras'
+import { useDeliveries } from '../../hooks/useDeliveries'
 
 const fieldClass =
   'w-full rounded-lg border border-gold/20 bg-ink px-4 py-3 text-cream placeholder:text-cream/35 outline-none transition focus:border-gold/55 focus:ring-1 focus:ring-gold/40'
@@ -59,11 +60,15 @@ export function OrderForm() {
   // luego debo manejar los estados de carga y error de los productos y extras, para mostrar un mensaje o spinner mientras se cargan
   const { data: productsData } = useProducts();
   const { data: extrasData } = useExtras();
+  const { data: deliveriesData} = useDeliveries();
+
+  const deliveriesMap = deliveriesData ? Object.fromEntries(deliveriesData?.map(p => [p.uuid, p])) : null; // to use like: const delivery = deliveriesMap[uuid];
+  const delivery = deliveriesMap ? deliveriesMap[getValues("delivery")] : null;
 
   const watchedItems = useWatch({ control, name: 'items' }) ?? []
   const filledItems = enrichOrderItems(watchedItems, extrasData || [], productsData || [])
   
-  const orderTotal = calcOrderTotal(filledItems, extrasData, productsData)
+  const orderTotal = calcOrderTotal(filledItems, extrasData, productsData, [delivery?.price])
 
   const addProductLine = useCallback(
     (productId) => {
@@ -120,7 +125,7 @@ export function OrderForm() {
     clearErrors('items')
     //console.log({...data, items, orderTotal})
     sendOrderData({...data, items, orderTotal})
-    sendOrder({ ...data, items }, extrasData || [], productsData || [])
+    sendOrder({ ...data, items }, extrasData || [], productsData || [], delivery || null)
   }
 
   const handleRemove = (index) => {
@@ -199,6 +204,10 @@ export function OrderForm() {
                     </span>
                   </li>
                 ))}
+                {delivery ? <li key={"delivery"} className="flex items-start justify-between gap-3">
+                  <span>{`Domicilio a ${delivery.locationName}`}</span>
+                  <span className="shrink-0 text-gold">{formatMoney(delivery.price)}</span>
+                </li> : null}
               </ul>
               <p className="mt-4 flex items-center justify-between border-t border-gold/15 pt-3 font-medium text-cream">
                 <span>Total estimado</span>
@@ -215,7 +224,7 @@ export function OrderForm() {
               noValidate
               className="space-y-5"
             >
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-3">
                 <div>
                   <label htmlFor="name" className={labelClass}>
                     Nombre
@@ -267,12 +276,42 @@ export function OrderForm() {
                     </p>
                   ) : null}
                 </div>
+
+                <div>
+                  <label htmlFor="delivery" className={labelClass}>
+                    Domicilio
+                  </label>
+                  <select
+                    id="delivery"
+                    className={fieldClass}
+                    aria-invalid={Boolean(errors.delivery)}
+                    {...register('delivery', {
+                      required: 'Seleccione una ubicación para realizar el domicilio.',
+                    })}
+                    onChange={()=> console.log(orderTotal)}
+                  >
+                  <option value="">Elige una ubicación</option>
+                  {deliveriesData?.map((option) => ( // here the option.uuid is used in deliveriesMap to quickly find the delivery data
+                  <option key={option.uuid} value={option.uuid}>
+                    {option.locationName}
+                    {option.price != null
+                      ? ` — ${formatMoney(option.price)}`
+                      : ' — A cotizar'}
+                  </option>
+                ))}
+                  </select>
+                  {errors.delivery ? (
+                    <p className="mt-1.5 text-sm text-flame" role="alert">
+                      {errors.delivery.message}
+                    </p>
+                  ) : null}
+                </div>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-3">
                 <div>
                   <label htmlFor="location" className={labelClass}>
-                    Localización (domicilio)
+                    Localización (detalles)
                   </label>
                   <input
                     id="location"
@@ -391,7 +430,7 @@ export function OrderForm() {
                 <div className="flex flex-wrap items-end justify-between gap-2">
                   <div>
                     <p className="text-xs tracking-wide text-cream/50 uppercase">
-                      Total del pedido
+                      Total del pedido + Domicilio
                     </p>
                     <p className="mt-1 font-display text-2xl text-gold-light sm:text-3xl">
                       {formatMoney(orderTotal)}

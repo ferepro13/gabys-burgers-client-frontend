@@ -16,6 +16,14 @@ const getExtras = async () => {
     //array de objetos con {uuid, name, price, stock, isAvailable, etc}
 }
 
+const getDeliveries = async () => {
+    const response = await fetch(`${API_URL}/domicilios`);
+    const domicilios = await response.json();
+
+    return domicilios;
+    //array de objetos con {uuid, locationName, price}
+}
+
 const sendOrderData = async (orderData) => {
     const response = await fetch(`${API_URL}/pedidos`, {
         method: "POST",
@@ -29,4 +37,4 @@ const sendOrderData = async (orderData) => {
     return result;
 }
 
-export {getProducts, getExtras, sendOrderData}
+export {getProducts, getExtras, sendOrderData, getDeliveries}

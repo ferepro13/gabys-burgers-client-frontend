@@ -5,6 +5,7 @@ import App from './App.jsx'
 import {ProductsProvider} from "./contexts/ProductsProvider"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import {ExtrasProvider} from "./contexts/ExtrasProvider"
+import { DeliveriesProvider } from './contexts/DeliveriesProvider.jsx'
 
 const queryClient = new QueryClient()
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <ExtrasProvider>
         <ProductsProvider>
-          <App />     
+          <DeliveriesProvider>
+            <App />
+          </DeliveriesProvider> 
         </ProductsProvider>
       </ExtrasProvider>
     </QueryClientProvider>
