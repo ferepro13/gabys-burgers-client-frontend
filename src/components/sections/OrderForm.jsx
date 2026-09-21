@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useFieldArray, useForm, useWatch } from 'react-hook-form'
 import { siteConfig } from '../../config/site'
 import { useWhatsAppOrder } from '../../hooks/useWhatsAppOrder'
@@ -63,12 +63,13 @@ export function OrderForm() {
   const { data: deliveriesData} = useDeliveries();
 
   const deliveriesMap = deliveriesData ? Object.fromEntries(deliveriesData?.map(p => [p.uuid, p])) : null; // to use like: const delivery = deliveriesMap[uuid];
-  const delivery = deliveriesMap ? deliveriesMap[getValues("delivery")] : null;
+  const [delivery, setDelivery] = useState("");
+  const deliveryData = deliveriesMap ? deliveriesMap[delivery] : null;
 
   const watchedItems = useWatch({ control, name: 'items' }) ?? []
   const filledItems = enrichOrderItems(watchedItems, extrasData || [], productsData || [])
   
-  const orderTotal = calcOrderTotal(filledItems, extrasData, productsData, [delivery?.price])
+  const orderTotal = calcOrderTotal(filledItems, extrasData, productsData, [deliveryData?.price || 0])
 
   const addProductLine = useCallback(
     (productId) => {
@@ -125,7 +126,7 @@ export function OrderForm() {
     clearErrors('items')
     //console.log({...data, items, orderTotal})
     sendOrderData({...data, items, orderTotal})
-    sendOrder({ ...data, items }, extrasData || [], productsData || [], delivery || null)
+    sendOrder({ ...data, items }, extrasData || [], productsData || [], deliveryData || null)
   }
 
   const handleRemove = (index) => {
@@ -204,9 +205,9 @@ export function OrderForm() {
                     </span>
                   </li>
                 ))}
-                {delivery ? <li key={"delivery"} className="flex items-start justify-between gap-3">
-                  <span>{`Domicilio a ${delivery.locationName}`}</span>
-                  <span className="shrink-0 text-gold">{formatMoney(delivery.price)}</span>
+                {deliveryData ? <li key={"delivery"} className="flex items-start justify-between gap-3">
+                  <span>{`Domicilio a ${deliveryData.locationName}`}</span>
+                  <span className="shrink-0 text-gold">{formatMoney(deliveryData.price)}</span>
                 </li> : null}
               </ul>
               <p className="mt-4 flex items-center justify-between border-t border-gold/15 pt-3 font-medium text-cream">
@@ -288,7 +289,8 @@ export function OrderForm() {
                     {...register('delivery', {
                       required: 'Seleccione una ubicación para realizar el domicilio.',
                     })}
-                    onChange={()=> console.log(orderTotal)}
+                    onChange={(e)=> {console.log(orderTotal), console.log(delivery), setDelivery(e.target.value)}}
+                    value={delivery}
                   >
                   <option value="">Elige una ubicación</option>
                   {deliveriesData?.map((option) => ( // here the option.uuid is used in deliveriesMap to quickly find the delivery data
