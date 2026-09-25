@@ -112,7 +112,7 @@ export function OrderForm() {
     }
   }, [addProductLine, clearErrors])
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const items = (data.items ?? []).filter((item) => item.productId)
 
     if (!items.length) {
@@ -125,8 +125,11 @@ export function OrderForm() {
 
     clearErrors('items')
     //console.log({...data, items})
-    sendOrderData({...data, items})
-    sendOrder({ ...data, items }, extrasData || [], productsData || [], deliveryData || null)
+    const result = await sendOrderData({...data, items});
+    console.log("result" , result);
+    if (result.message === 'Pedido creado con éxito') {
+      sendOrder({ ...data, items }, extrasData || [], productsData || [], deliveryData || null);
+    }
   }
 
   const handleRemove = (index) => {
