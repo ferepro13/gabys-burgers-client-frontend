@@ -124,8 +124,8 @@ export function OrderForm() {
     }
 
     clearErrors('items')
-    //console.log({...data, items, orderTotal})
-    sendOrderData({...data, items, orderTotal})
+    //console.log({...data, items})
+    sendOrderData({...data, items})
     sendOrder({ ...data, items }, extrasData || [], productsData || [], deliveryData || null)
   }
 
