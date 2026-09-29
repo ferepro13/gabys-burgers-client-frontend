@@ -19,6 +19,7 @@ export function OrderLineFields({
   getValues,
   setValue,
   errors,
+  clearErrors,
   productId,
   quantity,
   isLast,
@@ -106,6 +107,7 @@ export function OrderLineFields({
 
                   // Ajustar cantidad al cambiar de producto
                   if (next) {
+                    clearErrors("items");
                     const newProduct = stockProductsData?.find((p) => p.uuid === next);
                     const newStock = newProduct?.stock ?? 0;
                     const allItems = getValues().items || [];

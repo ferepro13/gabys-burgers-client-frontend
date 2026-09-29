@@ -409,6 +409,7 @@ export function OrderForm() {
                       getValues = {getValues}
                       setValue = {setValue}
                       errors={errors.items?.[index]}
+                      clearErrors={clearErrors}
                       productId={line.productId}
                       quantity={line.quantity}
                       isLast={isLast}
