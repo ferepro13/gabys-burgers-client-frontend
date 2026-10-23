@@ -16,6 +16,7 @@ orders for fast delivery burgers and other kinds of food
 - Basic accesibility
 - Animations and reduced-motion
 - Loading, error and empty states
+- Automatic unit testing for utils pricing functions
 
 ## Tech Stack
 - React
@@ -38,6 +39,7 @@ src/
 |--- data/
 |--- hooks/
 |--- utils/
+|--- tests/
 
 ### Data flow
 
@@ -85,10 +87,16 @@ pnpm build
 ```bash
 pnpm preview
 ```
+
+### Testing
+
+```bash
+pnpm run test
+```
+
 ## Known Limitations
 
-- Automated tests are not yet implemented.
-- Order creation will be move to a database transaction.
+- More unit tests could be further implemented.
 - Typescript migration is planned.
 - Production observability is limited.
 

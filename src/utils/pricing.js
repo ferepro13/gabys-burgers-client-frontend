@@ -8,7 +8,7 @@ export function getProductById(productId, orderCatalog = []) {
  * @param {number | null | undefined} amount
  */
 export function formatMoney(amount) {
-  if (amount == null || Number.isNaN(Number(amount))) return 'A cotizar'
+  if (amount === null || Number.isNaN(Number(amount))) return 'A cotizar'
   return new Intl.NumberFormat('es-US', {
     style: 'currency',
     currency: 'USD',
@@ -20,11 +20,11 @@ export function formatMoney(amount) {
 export function getUnitPrice(productId, orderCatalog = []) {
   const product = getProductById(productId, orderCatalog)
   if (!product) return null
-  return Number(product.unitPrice || product.price)
+  return Number(product.price || null)
 }
 
 export function calcLineTotal(productId, quantity, extras = [], extrasCatalog = [], orderCatalog = []) {
-  if (!productId || !quantity) return 0;
+  if (!productId || !quantity || quantity<0) return 0;
 
   const unit = getUnitPrice(productId, orderCatalog)
   if (unit == null) return null
@@ -84,7 +84,7 @@ export function enrichOrderItems(items, extrasCatalog = [], orderCatalog = []) {
       const quantity = (Number.isInteger(item.quantity) && Number(item.quantity) > 0) ? Number(item.quantity) : 1
       const extras = item?.extras || []
       const lineTotal = calcLineTotal(item.productId, quantity, extras, extrasCatalog || [], orderCatalog || [])
-      const unitPrice = Number(lineTotal)/quantity ?? product?.price ?? null
+      const unitPrice = Number(lineTotal)/quantity || product?.price || null
 
       return {
         productId: item.productId,
