@@ -60,6 +60,9 @@ importers:
       vite:
         specifier: ^8.1.1
         version: 8.1.5(jiti@2.7.0)
+      vite-plugin-prerender-static:
+        specifier: ^0.1.3
+        version: 0.1.3(vite@8.1.5(jiti@2.7.0))
       vite-plugin-seo-files:
         specifier: ^2.1.1
         version: 2.1.1(vite@8.1.5(jiti@2.7.0))
@@ -1146,6 +1149,9 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
+  spa-prerender-static@0.1.0:
+    resolution: {integrity: sha512-cOXRLGTQ/xyghr06xqj0vFiyxBD9NURO4QlEEJyhDU8YgUia9DXy/mdbpJ2sMfLYTL6qz3f/cc/Ha8s14RAEXg==}
+
   stack-generator@2.0.10:
     resolution: {integrity: sha512-mwnua/hkqM6pF4k8SnmZ2zfETsRUpWXREfA/goT8SLCV4iOFa4bzOX2nDipWAZFPTjLvQB82f5yaodMVhK0yJQ==}
 
@@ -1208,6 +1214,11 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  vite-plugin-prerender-static@0.1.3:
+    resolution: {integrity: sha512-v1qZtxU1BSbwf6J0A7AEdAbAoaYI5idD5SdTL9kKhY0I2nfHcrc32+24DHD3PxkLeC+BP7iAOtweuzvh0dpZfw==}
+    peerDependencies:
+      vite: ^4 || ^5 || ^6 || ^7
 
   vite-plugin-seo-files@2.1.1:
     resolution: {integrity: sha512-X1v7rKvKIxNJKL7+tcBS4AQgI9jTrLS4dUSQr5+4D+lxfDLnLAdGsDH1u/ZGXuTozdXTbsgL6T+sl1MVZFuFEg==}
@@ -2272,6 +2283,8 @@ snapshots:
 
   source-map@0.6.1: {}
 
+  spa-prerender-static@0.1.0: {}
+
   stack-generator@2.0.10:
     dependencies:
       stackframe: 1.3.4
@@ -2327,6 +2340,11 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  vite-plugin-prerender-static@0.1.3(vite@8.1.5(jiti@2.7.0)):
+    dependencies:
+      spa-prerender-static: 0.1.0
+      vite: 8.1.5(jiti@2.7.0)
 
   vite-plugin-seo-files@2.1.1(vite@8.1.5(jiti@2.7.0)):
     dependencies:
