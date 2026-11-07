@@ -30,7 +30,7 @@ const fieldClass =
 const labelClass = 'mb-1.5 block text-sm text-cream/70'
 
 export function OrderForm() {
-  const { sendOrder } = useWhatsAppOrder()
+  const { sendOrder: sendOrderToWhatsapp } = useWhatsAppOrder()
   const {
     register,
     control,
@@ -127,8 +127,8 @@ export function OrderForm() {
     //console.log({...data, items})
     const result = await sendOrderData({...data, items});
     console.log("result" , result);
-    if (result.message === 'Pedido creado con éxito') {
-      sendOrder({ ...data, items }, extrasData || [], productsData || [], deliveryData || null);
+    if (result.message === 'Pedido creado con éxito') { // this can be further moved to a modal, making opening whatsapp optional
+      sendOrderToWhatsapp({ ...data, items }, extrasData || [], productsData || [], deliveryData || null);
     }
   }
 
